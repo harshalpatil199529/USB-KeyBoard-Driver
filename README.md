@@ -1,20 +1,17 @@
-# USB-KeyBoard-Driver
 
-Changing the Functionality of the CAPSLOCK button in the legacy USB Keyboard Driver
+Basic Working - I have modified the USB keyboard driver in such a way that when we press the NUMLOCK key the led turns ON and when we press it again the led turns OFF.
 
+Complete Working -
+	1) MODE1 -
+	   - CAPSLOCK is not enabled   => CAPSLOCK LED is initially OFF, letter = Lowercase
+	   - CAPSLOCK is enabled       => CAPSLOCK LED will turn ON,  letter = Uppercase
+	
+	2) MODE2 - for enabling mode 2 we need to press NUMLOCK making sure that CAPSLOCK is OFF
+	   - initially in MODE2: CAPSLOCK is not enabled => CAPSLOCK LED is initially ON, NUMLOCK LED is also ON, letter = Lowercase
+	   - CAPSLOCK is enabled => CAPSLOCK LED turns OFF, NUMLOCK LED is also ON, letter = Uppercase
 
-In	the	original	driver, the	CAPSLOCK	led	is	turned	on	when	the	CAPSLOCK key	is	pressed the	first	
-time	and	is	turned	off	when	it	is	pressed	again, and	is	on	again	when	it	is	pressed	the	next	time,	
-and	so	on.	You’ll	change	the	code	to	introduce	two	modes	into	the	driver:	MODE1	and	MODE2.		
-When	the	driver	starts	functioning,	it	is	in	MODE1,	in	which CAPSLOCK	will	be	handled	as	usual.	
-MODE2	will	be	activated	when	NUMLOCK	is	pressed,	CAPSLOCK	is	not	pressed,	and	CAPSLOCK	
-is	not	on.	When	transitioning	to	MODE2,	the	CAPSLOCK	led	will	be	turned	on	automatically.	
-MODE2	will	be	active	until	NUMLOCK	is	pressed	again.
+	3) Going from MODE2 to MODE1 
+	   - While CAPSLOCK is not enabled => NUMLOCK is enabled, both NUMLOCK and CAPSLOCK LEDs will turn off, letter = Lowercase
+           - When CAPSLOCK is enabled     => NUMLOCK is enabled, CAPSLOCK LED will turn ON, NUMLOCK LED will turn OFF, letter = Uppercase
+           
 
-
-However,	when	in	MODE2, CAPSLOCK	led	will	turn off	when	CAPSLOCK	is	pressed	the	first	time	
-after	transitioning	to	MODE2	and	will	turn on	when	it	is	pressed	the	next	time,	and	so	on. In	
-MODE2, your	driver	should	leave	the	CAPSLOCK	led	status	in	a	way	that	will	be	compatible	with	
-MODE1,	e.g,	whether	the	input	layer	thinks	the	CAPSLOCK	is	on	or	not. As	a	result, in	MODE2,	
-when	the	CAPSLOCK	led	is	off	(on)	you	will	see	that	the	characters	that	are	typed	on	the	
-keyboard	will	be	displayed	in	upper	(lower)	case	mode.
